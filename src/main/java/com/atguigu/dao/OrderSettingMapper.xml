@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.OrderSettingMapper">
+
+     <insert id="batchInsert">
+          insert into t_ordersetting(orderDate,number) values
+          <foreach collection="args" item="os" separator=",">
+               (#{os.orderdate},#{os.number})
+          </foreach>
+     </insert>
+
+     <select id="countByDate" resultType="_long">
+          select count(*) from t_ordersetting where orderDate = #{orderdate}
+     </select>
+     <update id="updateNumberByDate">
+          update t_ordersetting set number = #{number}  where orderDate= #{orderdate}
+     </update>
+
+     <insert id="insert">
+          insert into t_ordersetting(orderDate,number) values(#{orderdate},#{number})
+     </insert>
+     <select id="getOrderSettingByMonth" resultType="com.atguigu.pojo.OrderSetting">
+          select id,orderDate orderdate,number,reservations from t_ordersetting where orderDate like #{date1}
+     </select>
+
+     <update id="editNumberByDate">
+          update t_ordersetting set number = #{number} where orderDate = #{orderdate}
+     </update>
+</mapper>

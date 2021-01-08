@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.TravelgroupTravelitemMapper">
+
+     <delete id="deleteByTravelItemId">
+         delete from t_travelgroup_travelitem where travelitem_id = #{id}
+     </delete>
+    <select id="count" resultType="_long">
+        select count(*) from t_travelgroup_travelitem where travelitem_id = #{id}
+    </select>
+
+    <insert id="insert">
+        insert into t_travelgroup_travelitem values
+        <foreach collection="tids" item="tid" separator=",">
+            (#{id},#{tid})
+        </foreach>
+    </insert>
+
+    <select id="findTravelItemIdByTravelgroupId" resultType="java.lang.Integer">
+         select travelitem_id from  t_travelgroup_travelitem  where travelgroup_id = #{id}
+    </select>
+
+    <delete id="deleteByTravelGroupId">
+        delete from t_travelgroup_travelitem  where travelgroup_id = #{id}
+    </delete>
+</mapper>
